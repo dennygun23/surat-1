@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//Auth
+Route::get('/', 'LoginController@index');
+Route::get('/login', 'LoginController@index');
+Route::post('/login', 'LoginController@login');
+
+
+Route::group(['middleware' => 'auth'], function () {
+	Route::get('/logout', 'LogoutController@index');
+	Route::get('/home', 'HomeController@index');
 });
